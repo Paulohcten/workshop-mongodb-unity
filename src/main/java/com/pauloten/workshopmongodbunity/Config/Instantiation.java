@@ -1,5 +1,6 @@
 package com.pauloten.workshopmongodbunity.Config;
 
+import com.pauloten.workshopmongodbunity.DTO.AuthorDTO;
 import com.pauloten.workshopmongodbunity.Domain.Post;
 import com.pauloten.workshopmongodbunity.Domain.User;
 import com.pauloten.workshopmongodbunity.Repository.PostRepository;
@@ -35,10 +36,11 @@ public class Instantiation implements CommandLineRunner {
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
         User jack = new User(null, "Jack Black", "jack@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Las Vegas, here I go!", "FINALLY some Vacations, I'm Going to travel",jack);
-        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Good Morning", "I'm super happy for some reason!", maria);
-
         userRepository.saveAll(Arrays.asList(maria, alex, bob,jack));
+
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Las Vegas, here I go!", "FINALLY some Vacations, I'm Going to travel",new AuthorDTO(jack));
+        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Good Morning", "I'm super happy for some reason!", new AuthorDTO(maria));
+
         postRepository.saveAll(Arrays.asList(post1,post2));
     }
 }
